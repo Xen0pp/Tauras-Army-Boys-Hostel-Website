@@ -188,7 +188,7 @@ const Header = () => {
     //   "flex bg-white text-black justify-between  px-5 items-center h-[100px] border-b border-[#8D8787] transition-all duration-300 ease-linear  sticky shadow-md"
     // }
     >
-      <div className="">
+      <div className="hidden lg:block">
         <Link href="/" className="flex items-center gap-3">
           <Image
             className="w-[60px] lg:w-[80px] 2xl:w-[100px]"
@@ -199,6 +199,14 @@ const Header = () => {
             Tauras Army Boys Hostel
           </h1>
         </Link>
+      </div>
+
+      {/* Mobile Branding */}
+      <div className="lg:hidden flex items-center gap-1 absolute left-1/2 -translate-x-1/2 pointer-events-none">
+        <Image src={TaurasLogo} alt="TABH Logo" width={35} height={35} className="rounded-sm w-[25px] h-[25px] sm:w-[35px] sm:h-[35px]" />
+        <h2 className="font-bold text-[10px] sm:text-sm text-[#2A2470] whitespace-nowrap">
+          Tauras Army Boys Hostel
+        </h2>
       </div>
       <div className="hidden w-full lg:flex   lg:gap-5 xl:gap-10  justify-center gap-5">
         {headerData.map((item) => (

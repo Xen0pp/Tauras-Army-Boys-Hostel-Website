@@ -80,15 +80,16 @@ const Home = () => {
       {/* ════════════════════════════════════════════════════════
           MOBILE  (<lg): Slider on top + tab switcher below
           ════════════════════════════════════════════════════════ */}
-      <div className="flex lg:hidden flex-col h-[calc(100vh-4rem)] overflow-hidden">
+      <div className="flex lg:hidden flex-col w-full">
 
-        {/* Slider — fixed height */}
-        <div className="h-[42vw] min-h-[180px] max-h-[260px] shrink-0 bg-gray-950">
+        {/* Slider — fill the entire screen (minus header) */}
+        <div className="w-full h-[calc(100vh-64px)] shrink-0 bg-gray-950 relative">
           <ImageSlider />
         </div>
 
         {/* Tab bar */}
-        <div className="flex shrink-0 border-b border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900">
+        {/* Tab bar — sticky */}
+        <div className="flex shrink-0 sticky top-0 z-20 border-b border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900">
           {["posts", ...(user ? ["events"] : [])].map((tab) => (
             <button
               key={tab}
@@ -104,7 +105,7 @@ const Home = () => {
         </div>
 
         {/* Tab content */}
-        <div className="flex-1 overflow-y-auto bg-gray-50 dark:bg-gray-950">
+        <div className="flex-1 bg-gray-50 dark:bg-gray-950">
           <AnimatePresence mode="wait">
             {mobileTab === "posts" && (
               <motion.div

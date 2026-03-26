@@ -87,8 +87,8 @@ const EligibilityContainer = () => {
   return (
     <div
       className={`min-h-screen w-full p-4 md:p-8 rounded-xl ${isDark
-          ? "bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900"
-          : "bg-gradient-to-br from-vips-cream via-white to-vips-cream"
+        ? "bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900"
+        : "bg-gradient-to-br from-vips-cream via-white to-vips-cream"
         }`}
     >
       <motion.div
@@ -110,8 +110,8 @@ const EligibilityContainer = () => {
               <div className="flex items-center justify-center mb-4">
                 <div
                   className={`w-16 h-16 rounded-full flex items-center justify-center ${isDark
-                      ? "bg-gradient-to-br from-purple-500/30 to-purple-500/10"
-                      : "bg-gradient-to-br from-red-500/30 to-red-500/10"
+                    ? "bg-gradient-to-br from-purple-500/30 to-purple-500/10"
+                    : "bg-gradient-to-br from-red-500/30 to-red-500/10"
                     }`}
                 >
                   <Shield className="text-red-600 h-8 w-8" />
@@ -134,7 +134,7 @@ const EligibilityContainer = () => {
               </p>
 
               {/* Download Button */}
-              <div className="mt-6">
+              <div className="mt-6 flex justify-center">
                 <Button
                   onClick={handleDownload}
                   className="bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white px-8 py-3 rounded-full font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
@@ -614,8 +614,8 @@ const EligibilitySection = ({
             <div className="flex items-center gap-3">
               <div
                 className={`w-10 h-10 rounded-lg flex items-center justify-center ${isDark
-                    ? "bg-gradient-to-br from-red-500/30 to-red-500/10"
-                    : "bg-gradient-to-br from-red-500/20 to-red-500/5"
+                  ? "bg-gradient-to-br from-red-500/30 to-red-500/10"
+                  : "bg-gradient-to-br from-red-500/20 to-red-500/5"
                   }`}
               >
                 {icon}

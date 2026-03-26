@@ -5,18 +5,19 @@ import { useMutation, useQueryClient, useQuery } from "@tanstack/react-query";
 import { useAuth } from "@/contexts/AuthContext";
 
 export const useGetPosts = () => {
-  const { getAuthToken } = useAuth();
+  const { getAuthToken, user } = useAuth();
 
   return useQuery({
-    queryKey: ["posts"],
+    queryKey: ["posts", user?.uid || "guest"],
     queryFn: async () => {
       const token = await getAuthToken();
+      // Only include Authorization header if token exists
+      const headers = token ? { Authorization: `Bearer ${token}` } : {};
+
       return await axiosRequest({
         url: `/api/posts/`,
         method: "GET",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+        headers,
       });
     },
   });

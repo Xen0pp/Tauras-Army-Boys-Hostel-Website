@@ -22,10 +22,9 @@ async function verifyAuth(request) {
 // GET /api/posts - List all posts
 export async function GET(request) {
   try {
+    // Optionally verify auth, but we don't reject if not found
+    // because all users (even guests) should be able to view posts.
     const user = await verifyAuth(request);
-    if (!user) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-    }
 
     const postsRef = adminDb.collection('posts');
     const snapshot = await postsRef.orderBy('createdAt', 'desc').get();

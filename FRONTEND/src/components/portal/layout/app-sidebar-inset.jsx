@@ -74,9 +74,9 @@ export function AppSidebarInset({ children }) {
         </div>
 
         {/* Branding in the middle */}
-        <div className="hidden lg:flex items-center gap-2 absolute left-1/2 -translate-x-1/2 pointer-events-none">
-          <Image src={TaurasLogo} alt="TABH Logo" width={35} height={35} className="rounded-sm" />
-          <h2 className="font-bold text-lg text-[#2A2470] whitespace-nowrap">
+        <div className="flex items-center gap-1 sm:gap-2 absolute left-1/2 -translate-x-1/2 pointer-events-none">
+          <Image src={TaurasLogo} alt="TABH Logo" width={35} height={35} className="rounded-sm w-[25px] h-[25px] sm:w-[35px] sm:h-[35px]" />
+          <h2 className="font-bold text-[10px] sm:text-sm md:text-lg text-[#2A2470] whitespace-nowrap">
             Tauras Army Boys Hostel
           </h2>
         </div>
