@@ -2,10 +2,8 @@
 import { useParams, useSearchParams } from "next/navigation";
 import React from "react";
 
-const Error = ({ error }) => {
+const Error = () => {
   const params = useSearchParams();
-
-  console.log("error = ", error);
 
   console.log("params = ", params.get("error"));
   return (
