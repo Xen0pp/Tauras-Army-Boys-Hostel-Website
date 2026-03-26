@@ -43,7 +43,7 @@ const PostCard = ({ post }) => {
           </h3>
           <span className="text-sm text-gray-500 dark:text-gray-400 italic">
             {
-              roles?.results?.find((role) => role.id === userInfo?.result?.role)
+              roles?.find((role) => role.id === (userInfo as any)?.result?.role)
                 ?.role_name
             }
           </span>
