@@ -156,7 +156,7 @@ export function AppSidebarInset({ children }) {
         </div>
       </header>
 
-      <div className="sm:p-5 py-5 h-[93vh] overflow-y-auto bg-[--base-bg]  dark:bg-[--light-bg-dark]">
+      <div className="h-[calc(100vh-4rem)] overflow-hidden bg-[--base-bg] dark:bg-[--light-bg-dark]">
         {children}
       </div>
     </SidebarInset>
