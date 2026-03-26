@@ -1,7 +1,9 @@
 "use client";
-// import { SidebarInset } from "../ui/sidebar";
 
-// import { Separator } from "../../components/ui/separator";
+import React from "react";
+import Link from "next/link";
+import Image from "next/image";
+
 import { Separator } from "../../ui/separator";
 import {
   Breadcrumb,
@@ -11,23 +13,25 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "../../ui/breadcrumb";
-// import Socials from "@/components/socials";
 import {
   SidebarMenuButton,
   SidebarMenuItem,
   SidebarTrigger,
+  Sidebar,
+  SidebarContent,
+  SidebarFooter,
+  SidebarGroup,
+  SidebarGroupContent,
+  SidebarGroupLabel,
+  SidebarHeader,
+  SidebarMenu,
+  SidebarInset,
 } from "../../ui/sidebar";
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
 } from "../../ui/tooltip";
-import { SidebarInset } from "../../ui/sidebar";
-import TaurasLogo from "/public/assets/TaurasLogo.jpg";
-import Image from "next/image";
-import Link from "next/link";
-
-import { useTheme } from "next-themes";
 import {
   DropdownMenuContent,
   DropdownMenuItem,
@@ -36,7 +40,36 @@ import {
   DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from "../../ui/dropdown-menu";
-import { ChevronsUpDown, SunMoon } from "lucide-react";
+import { DropdownMenu, DropdownMenuGroup } from "@radix-ui/react-dropdown-menu";
+import { useTheme } from "next-themes";
+import {
+  ChevronsUpDown,
+  SunMoon,
+  GraduationCap,
+  Users,
+  Target,
+  MessageSquare,
+  Home,
+  User,
+  Briefcase,
+  Calendar,
+  BookOpen,
+  Info,
+  Phone,
+  Settings,
+  Bell,
+  LogOut,
+  FileText,
+  CircleUserRound,
+  BadgeCheck,
+  Building2,
+  Camera,
+  Shield,
+} from "lucide-react";
+import TaurasLogo from "/public/assets/TaurasLogo.jpg";
+import { useAuth } from "@/contexts/AuthContext";
+
+// ─── AppSidebarInset ────────────────────────────────────────────────────────
 
 export function AppSidebarInset({ children }) {
   const { theme, setTheme } = useTheme();
@@ -63,9 +96,6 @@ export function AppSidebarInset({ children }) {
               </BreadcrumbItem>
               <BreadcrumbSeparator className="hidden md:block" />
               <BreadcrumbItem>
-                {/* <BreadcrumbPage className="block md:hidden">
-                  Sidebar is only resizable on desktop
-                </BreadcrumbPage> */}
                 <BreadcrumbPage className="hidden md:block">
                   Alumni Portal
                 </BreadcrumbPage>
@@ -84,7 +114,6 @@ export function AppSidebarInset({ children }) {
 
         <div className="mr-2 sm:mr-4">
           {/* Theme switcher */}
-
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <SidebarMenuButton
@@ -95,11 +124,6 @@ export function AppSidebarInset({ children }) {
                 <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground border-none outline-none">
                   <SunMoon className="size-4" />
                 </div>
-                {/* <div className="grid flex-1 text-left text-sm leading-tight">
-                  <span className="truncate font-semibold">Select Theme</span>
-                  <span className="truncate text-xs">sub text</span>
-                </div> */}
-                {/* <ChevronsUpDown className="ml-auto" /> */}
               </SidebarMenuButton>
             </DropdownMenuTrigger>
             <DropdownMenuContent
@@ -112,21 +136,9 @@ export function AppSidebarInset({ children }) {
                 Themes
               </DropdownMenuLabel>
               {[
-                {
-                  name: "Light",
-                  // logo: null,
-                  key: "light",
-                },
-                {
-                  name: "Dark",
-                  // logo: null,
-                  key: "dark",
-                },
-                {
-                  name: "System",
-                  // logo: null,
-                  key: "system",
-                },
+                { name: "Light", key: "light" },
+                { name: "Dark", key: "dark" },
+                { name: "System", key: "system" },
               ].map((theme, index) => (
                 <DropdownMenuItem
                   id={theme.name}
@@ -134,20 +146,11 @@ export function AppSidebarInset({ children }) {
                   onClick={() => setTheme(theme.key)}
                   className="gap-2 p-2"
                 >
-                  {/* <div className="flex size-6 items-center justify-center rounded-sm border">
-                    logo <team.logo className="size-4 shrink-0" />
-                  </div> */}
                   {theme.name}
                   <DropdownMenuShortcut>⌘{index + 1}</DropdownMenuShortcut>
                 </DropdownMenuItem>
               ))}
               <DropdownMenuSeparator />
-              {/* <DropdownMenuItem className="gap-2 p-2">
-              <div className="flex size-6 items-center justify-center rounded-md border bg-background">
-                <Plus className="size-4" />
-              </div>
-              <div className="font-medium text-muted-foreground">Add team</div>
-            </DropdownMenuItem> */}
             </DropdownMenuContent>
           </DropdownMenu>
         </div>
@@ -160,105 +163,36 @@ export function AppSidebarInset({ children }) {
   );
 }
 
-import { useAuth } from "@/contexts/AuthContext";
-import {
-  GraduationCap,
-  Users,
-  Target,
-  MessageSquare,
-  Home,
-  User,
-  Briefcase,
-  Calendar,
-  BookOpen,
-  Info,
-  Phone,
-  Settings,
-  Bell,
-  LogOut,
-  FileText,
-  CircleUserRound,
-  BadgeCheck,
-  Building2,
-  Camera,
-  Shield
-} from "lucide-react";
+// ─── Navigation Structure ────────────────────────────────────────────────────
 
-import {
-  Sidebar,
-  SidebarContent,
-  SidebarFooter,
-  SidebarGroup,
-  SidebarGroupContent,
-  SidebarGroupLabel,
-  SidebarHeader,
-  SidebarMenu,
-} from "../../ui/sidebar";
-import { DropdownMenu, DropdownMenuGroup } from "@radix-ui/react-dropdown-menu";
-
-
-// Navigation structure
 const navigationGroups = [
   {
     title: "Main",
     items: [
-      {
-        title: "Dashboard",
-        url: "/portal",
-        icon: Home,
-      },
-      {
-        title: "Eligibility",
-        url: "/portal/eligibility",
-        icon: FileText,
-      },
-      {
-        title: "Rooms & Facilities",
-        url: "/portal/rooms-facilities",
-        icon: Building2,
-      },
-      {
-        title: "Gallery",
-        url: "/portal/gallery",
-        icon: Camera,
-      },
-      {
-        title: "TABH Administration",
-        url: "/portal/administration",
-        icon: Shield,
-      },
-      {
-        title: "Events",
-        url: "/portal/events",
-        icon: Calendar,
-      },
+      { title: "Dashboard", url: "/portal", icon: Home },
+      { title: "Eligibility", url: "/portal/eligibility", icon: FileText },
+      { title: "Rooms & Facilities", url: "/portal/rooms-facilities", icon: Building2 },
+      { title: "Gallery", url: "/portal/gallery", icon: Camera },
+      { title: "TABH Administration", url: "/portal/administration", icon: Shield },
+      { title: "Events", url: "/portal/events", icon: Calendar },
     ],
   },
   {
     title: "Resources",
     items: [
-      {
-        title: "About TABH",
-        url: "/portal/about-alumni",
-        icon: Info,
-      },
-      {
-        title: "Contact",
-        url: "/portal/contact",
-        icon: Phone,
-      },
+      { title: "About TABH", url: "/portal/about-alumni", icon: Info },
+      { title: "Contact", url: "/portal/contact", icon: Phone },
     ],
   },
 ];
 
+// ─── DemoSidebar ─────────────────────────────────────────────────────────────
+
 export function DemoSidebar() {
   const { user, userInfo, signOut } = useAuth();
 
-  // Add admin items for superusers
   const getNavigationGroups = () => {
     const groups = [...navigationGroups];
-
-
     return groups;
   };
 
