@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { adminDb, adminAuth } from '@/lib/firebase/admin';
 import { FieldValue } from 'firebase-admin/firestore';
+import { isAdmin, isAdminByEmail } from '@/lib/auth';
 
 async function verifyAuth(request) {
   try {
@@ -65,8 +66,11 @@ export async function POST(request) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    // Admin check
-    if (user.email !== 'mohitkumarbiswas9@gmail.com') {
+    // Admin check via Firestore RBAC (with hardcoded fallback)
+    const adminByUid = await isAdmin(user.uid);
+    const adminByEmail = user.email ? await isAdminByEmail(user.email) : false;
+    const hardcodedAdmin = user.email === 'mohitkumarbiswas9@gmail.com';
+    if (!adminByUid && !adminByEmail && !hardcodedAdmin) {
       return NextResponse.json({ error: 'Forbidden: Only admin can create users' }, { status: 403 });
     }
 
