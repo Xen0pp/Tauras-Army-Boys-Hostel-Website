@@ -160,9 +160,6 @@ export function AppSidebarInset({ children }) {
   );
 }
 
-
-import React from "react";
-import Link from "next/link";
 import { useAuth } from "@/contexts/AuthContext";
 import {
   GraduationCap,
