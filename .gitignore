@@ -1,0 +1,55 @@
+# TABH Portal - .gitignore
+
+# Next.js
+FRONTEND/.next/
+FRONTEND/out/
+
+# Dependencies
+FRONTEND/node_modules/
+FRONTEND/.pnp
+FRONTEND/.pnp.js
+
+# Testing
+FRONTEND/coverage/
+
+# Local env files
+FRONTEND/.env
+FRONTEND/.env.*
+FRONTEND/.env.local
+FRONTEND/.env.development.local
+FRONTEND/.env.test.local
+FRONTEND/.env.production.local
+
+# Service Account Keys
+FRONTEND/serviceAccountKey.json
+
+# Misc
+.DS_Store
+*.pem
+*.log
+*.tmp
+*.temp
+*.swp
+*.bak
+
+# IDE
+.vscode/
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.idea/
+*.iws
+*.iml
+*.ipr
+
+# OS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Desktop.ini
+$RECYCLE.BIN/

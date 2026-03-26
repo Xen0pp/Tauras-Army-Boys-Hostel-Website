@@ -1,0 +1,71 @@
+"use client";
+
+// import Footer from "@/components/shared/Footer";
+// import Header from "@/components/shared/Header";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ThemeProvider } from "next-themes";
+
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import dynamic from "next/dynamic";
+import { Suspense, useState } from "react";
+const AppProgressBar = dynamic(
+  () => import("next-nprogress-bar").then((mod) => mod.AppProgressBar),
+  {
+    ssr: true,
+  }
+);
+const SnackbarProvider = dynamic(
+  () => import("notistack").then((mod) => mod.SnackbarProvider),
+  {
+    ssr: true,
+  }
+);
+
+const CustomRootProvider = ({ children }) => {
+  //
+
+  const [queryClient] = useState(() => new QueryClient({
+    defaultOptions: {
+      queries: {
+        retry: 1,
+        staleTime: 5 * 60 * 1000, // 5 minutes
+        cacheTime: 10 * 60 * 1000, // 10 minutes
+        refetchOnWindowFocus: false,
+        refetchOnMount: false,
+      },
+    },
+  }));
+
+  // const { theme, setTheme } = useTheme();
+
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <QueryClientProvider client={queryClient}>
+        <SnackbarProvider>
+          {/* <AppProgressBar
+            height="3px"
+            color="#805ad5"
+            options={{ showSpinner: false }}
+            shallowRouting
+          /> */}
+          {/* <Header /> */}
+
+          <ThemeProvider
+            enableSystem={false}
+            attribute="class"
+            defaultTheme="light"
+            forcedTheme="light"
+            disableTransitionOnChange
+          >
+            {children}
+          </ThemeProvider>
+          {/* <Footer /> */}
+        </SnackbarProvider>
+
+        <ReactQueryDevtools initialIsOpen={false} />
+      </QueryClientProvider>
+    </Suspense>
+  );
+};
+
+export default CustomRootProvider;
