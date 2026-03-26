@@ -93,26 +93,48 @@ Ensure you have the following installed:
 
    The portal should now be accessible at `http://localhost:3000`.
 
-## Architecture
+## Automation & Architecture
 
-The project has been migrated from a Django + SQLite monolith to a modern serverless architecture using **Next.js API Routes** and **Firebase**.
+To make the platform robust, scalable, and secure, several automated systems and architectural migrations were implemented:
 
-- **Authentication**: Custom AuthProvider using Firebase Client SDK.
-- **API Security**: Next.js API routes verify Firebase ID tokens using the Admin SDK.
-- **Data Persistence**: Firestore is used for all records (Users, Posts, Events, Mentors).
-- **Public Access**: Specific sections (Home, Resources) are accessible without login, while administrative and social features require authenticated @vipstc.edu.in accounts.
+- **Serverless Architecture Migration**: The project was migrated from a Python Django + SQLite monolith to a modern serverless architecture using **Next.js API Routes** and **Firebase** (Firestore, Storage, Authentication). This ensures automatic horizontal scaling, zero-downtime deployments, and high availability.
+- **Automated Authentication & API Security**: Custom `AuthProvider` using Firebase Client SDK. Route protection is fully automated via Next.js middleware. Next.js API routes securely verify Firebase ID tokens using the Admin SDK.
+- **Automated Content Filtering**: The backend/API automatically filters database queries based on an `is_public` flag. This allows administrators to post content safely and let the system automatically deliver it to public visitors or exclusively to authenticated members.
+- **Role-Based Access Control (RBAC)**: Automated assignment of "Admin" roles to specific, verified email handles (e.g., `mohitkumarbiswas9@gmail.com`). This automation dictates write-capabilities for creating events, managing job posts, and altering core data.
+- **Data Persistence**: Firestore NoSQL databases are utilized for all persistent records (Users, Posts, Events, Mentors, Content).
+
+## Code Structure & Modules Elaboration
+
+The TABH codebase strongly utilizes the Next.js App Router, heavily modularizing logic into discrete features. The modules correspond closely to the user interfaces and APIs, strictly categorized into two main segments:
+
+### A. Public Modules (No Login Required)
+These modules exist to inform prospective hostelers and the general internet public.
+- **Home & About TABH**: The landing pages detailing the hostel's history and mission.
+- **Gallery & Blogs**: Visual and narrative showcases of hostel life, strictly filtered for public viewing.
+- **Resources**: Centralized repository of downloadable documents, rules, guidelines, and reading materials.
+- **Eligibility & Admissions**: Outlines admission criteria and processes.
+- **Rooms & Facilities**: Details the living conditions and infrastructural amenities.
+- **Contact**: Secure public interface for inquiries.
+
+### B. Private / Authenticated Modules (Portal Dashboard)
+These modules reside under the `FRONTEND/src/app/portal/*` directory and rigorously require an authenticated session via a valid `@vipstc.edu.in` account or an approved registration.
+- **Portal Dashboard & Profile**: Personalized landing area summarizing the latest network activities.
+- **Alumni & Hostelers Directory**: Searchable databases connecting past and present residents globally.
+- **Mentorship System**: Allows experienced alumni to mentor current students. Mentors apply via automated multi-step forms that process and persistently store progressive applicant data, streamlining mentor-mentee pairing.
+- **Job Postings**: Career vacancy and referral system shared exclusively over the TABH brotherhood network.
+- **Member Events & Committee**: Secure space tracking exclusive gatherings, transparent discussions, and maintaining committee affairs.
+- **Admin Panel**: An exclusive interface built strictly for platform administrators managing user approvals, role assignments, system-wide public/private toggles, and ensuring platform integrity.
 
 ## **User Interface**
 
 ## UI Screenshots
 
 ![dashboard](ui-ss/dashboard.png)
-![events](ui-ss/events.png)
-![alumni-list](ui-ss/alumni-list.png)
-![alumni-profile](ui-ss/alumni-profile.png)
-![mentorship](ui-ss/mentorship.png)
-![mentorship-chat](ui-ss/mentorship-chat.png)
-![admin](ui-ss/admin.png)
+![eligibility](ui-ss/eligibility.png)
+![findMentor](ui-ss/findMentor.png)
+![gallery](ui-ss/gallery.png)
+![rooms](ui-ss/rooms.png)
+![MentorshipHub](ui-ss/MentorshipHub.png)
 
 ## Contributing
 
