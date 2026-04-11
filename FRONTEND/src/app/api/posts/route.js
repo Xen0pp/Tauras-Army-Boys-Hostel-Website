@@ -72,7 +72,7 @@ export async function POST(request) {
     const userData = userDoc.data();
 
     // Admin check
-    if (userData?.role?.id != 3 && userData?.role?.id !== "3" && user.email !== 'mohitkumarbiswas9@gmail.com') {
+    if (userData?.role?.id != 3 && userData?.role?.id !== "3" && !['mohitkumarbiswas9@gmail.com', 'taurusarmyboyshostel@gmail.com'].includes(user.email)) {
       return NextResponse.json({ error: 'Forbidden: Only admin can create posts' }, { status: 403 });
     }
 

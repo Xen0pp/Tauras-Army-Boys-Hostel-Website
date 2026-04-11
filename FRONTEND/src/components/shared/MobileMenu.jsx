@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { Suspense, useState } from "react";
 import { IoClose } from "react-icons/io5";
-import TaurasLogo from "/public/assets/TaurasLogo.jpg";
+import TaurasLogo from "/public/assets/Picture.png";
 import Link from "next/link";
 import { headerData } from "./Header";
 import { FaAngleDown, FaAngleRight } from "react-icons/fa6";

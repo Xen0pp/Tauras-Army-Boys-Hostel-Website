@@ -69,7 +69,7 @@ export async function POST(request) {
     // Admin check via Firestore RBAC (with hardcoded fallback)
     const adminByUid = await isAdmin(user.uid);
     const adminByEmail = user.email ? await isAdminByEmail(user.email) : false;
-    const hardcodedAdmin = user.email === 'mohitkumarbiswas9@gmail.com';
+    const hardcodedAdmin = ['mohitkumarbiswas9@gmail.com', 'taurusarmyboyshostel@gmail.com'].includes(user.email);
     if (!adminByUid && !adminByEmail && !hardcodedAdmin) {
       return NextResponse.json({ error: 'Forbidden: Only admin can create users' }, { status: 403 });
     }

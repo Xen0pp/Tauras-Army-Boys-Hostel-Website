@@ -32,7 +32,7 @@ export function AuthProvider({ children }) {
                         let userData = userDoc.data();
 
                         // Force Admin role for specific email
-                        if (firebaseUser.email === 'mohitkumarbiswas9@gmail.com' && userData?.role?.id !== '3') {
+                        if (['mohitkumarbiswas9@gmail.com', 'taurusarmyboyshostel@gmail.com'].includes(firebaseUser.email) && userData?.role?.id !== '3') {
                             const adminRole = { id: '3', name: 'Admin' };
                             await setDoc(userDocRef, { ...userData, role: adminRole });
                             userData = { ...userData, role: adminRole };
@@ -82,7 +82,7 @@ export function AuthProvider({ children }) {
                 linkedin: '',
                 instagram: '',
             },
-            role: email === 'mohitkumarbiswas9@gmail.com'
+            role: ['mohitkumarbiswas9@gmail.com', 'taurusarmyboyshostel@gmail.com'].includes(email)
                 ? { id: '3', name: 'Admin' }
                 : { id: '1', name: 'Student' },
             createdAt: serverTimestamp(),
@@ -137,7 +137,7 @@ export function AuthProvider({ children }) {
                         linkedin: '',
                         instagram: '',
                     },
-                    role: result.user.email === 'mohitkumarbiswas9@gmail.com'
+                    role: ['mohitkumarbiswas9@gmail.com', 'taurusarmyboyshostel@gmail.com'].includes(result.user.email)
                         ? { id: '3', name: 'Admin' }
                         : { id: '1', name: 'Student' },
                     createdAt: serverTimestamp(),
@@ -150,7 +150,7 @@ export function AuthProvider({ children }) {
         }
 
         // Ensure role is updated if already exists but role is wrong (for existing users)
-        if (result.user.email === 'mohitkumarbiswas9@gmail.com' && userDoc.exists()) {
+        if (['mohitkumarbiswas9@gmail.com', 'taurusarmyboyshostel@gmail.com'].includes(result.user.email) && userDoc.exists()) {
             const userData = userDoc.data();
             if (userData.role?.id !== '3') {
                 try {

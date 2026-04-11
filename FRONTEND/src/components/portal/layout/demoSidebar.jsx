@@ -66,7 +66,7 @@ import {
   Camera,
   Shield,
 } from "lucide-react";
-import TaurasLogo from "/public/assets/TaurasLogo.jpg";
+import TaurasLogo from "/public/assets/Picture.png";
 import { useAuth } from "@/contexts/AuthContext";
 
 // ─── AppSidebarInset ────────────────────────────────────────────────────────

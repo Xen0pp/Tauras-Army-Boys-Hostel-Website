@@ -6,7 +6,7 @@
 import { adminDb } from './firebase/admin';
 
 // Bootstrap admin emails — these always have admin access even without a Firestore document
-const BOOTSTRAP_ADMIN_EMAILS = ['mohitkumarbiswas9@gmail.com'];
+const BOOTSTRAP_ADMIN_EMAILS = ['mohitkumarbiswas9@gmail.com', 'taurusarmyboyshostel@gmail.com'];
 
 /**
  * Check if a user is an admin

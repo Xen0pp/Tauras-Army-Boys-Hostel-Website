@@ -57,7 +57,7 @@ export async function PUT(request, { params }) {
     const { id } = params;
 
     // Check if user is admin or updating their own profile
-    const isAdmin = user.email === 'mohitkumarbiswas9@gmail.com';
+    const isAdmin = ['mohitkumarbiswas9@gmail.com', 'taurusarmyboyshostel@gmail.com'].includes(user.email);
     if (!isAdmin && user.uid !== id) {
       return NextResponse.json({ error: 'Forbidden: You can only update your own profile' }, { status: 403 });
     }
@@ -102,7 +102,7 @@ export async function DELETE(request, { params }) {
     }
 
     // Admin check
-    if (user.email !== 'mohitkumarbiswas9@gmail.com') {
+    if (!['mohitkumarbiswas9@gmail.com', 'taurusarmyboyshostel@gmail.com'].includes(user.email)) {
       return NextResponse.json({ error: 'Forbidden: Only admin can delete users' }, { status: 403 });
     }
 

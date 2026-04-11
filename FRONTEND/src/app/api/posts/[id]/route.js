@@ -72,7 +72,7 @@ export async function PUT(request, { params }) {
     }
 
     // Check if user is the owner or an admin
-    if (postDoc.data().createdBy.uid !== user.uid && user.email !== 'mohitkumarbiswas9@gmail.com') {
+    if (postDoc.data().createdBy.uid !== user.uid && !['mohitkumarbiswas9@gmail.com', 'taurusarmyboyshostel@gmail.com'].includes(user.email)) {
       return NextResponse.json({ error: 'Forbidden: You can only edit your own posts' }, { status: 403 });
     }
 
@@ -115,7 +115,7 @@ export async function DELETE(request, { params }) {
     }
 
     // Check if user is the owner or an admin
-    if (postDoc.data().createdBy.uid !== user.uid && user.email !== 'mohitkumarbiswas9@gmail.com') {
+    if (postDoc.data().createdBy.uid !== user.uid && !['mohitkumarbiswas9@gmail.com', 'taurusarmyboyshostel@gmail.com'].includes(user.email)) {
       return NextResponse.json({ error: 'Forbidden: You can only delete your own posts' }, { status: 403 });
     }
 

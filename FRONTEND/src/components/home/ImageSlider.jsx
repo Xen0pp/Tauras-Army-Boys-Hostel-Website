@@ -8,16 +8,28 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 const ImageSlider = () => {
     const images = [
         {
-            src: "/assets/Tabh1.png",
+            src: "/assets/TABH.png",
             alt: "Taurus Army Boys Hostel - Main Gate",
+        },
+        {
+            src: "/assets/Tara_Front.png",
+            alt: "Taurus Army Boys Hostel - Tara Front",
+        },
+        {
+            src: "/assets/Tabh3.png",
+            alt: "Taurus Army Boys Hostel - Building View",
+        },
+        {
+            src: "/assets/Tara_Side.png",
+            alt: "Taurus Army Boys Hostel - Tara Side",
+        },
+        {
+            src: "/assets/Thorat_Aerial.png",
+            alt: "Taurus Army Boys Hostel - Thorat Aerial",
         },
         {
             src: "/assets/Tabh2.png",
             alt: "Taurus Army Boys Hostel - Courtyard",
-        },
-        {
-            src: "/assets/Tabh3.png",
-            alt: "Taurus Army Boys Hostel - Building",
         },
     ];
 

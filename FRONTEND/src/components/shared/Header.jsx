@@ -1,6 +1,6 @@
 "use client";
 import { Suspense, useState } from "react";
-import TaurasLogo from "/public/assets/TaurasLogo.jpg";
+import TaurasLogo from "/public/assets/Picture.png";
 import Image from "next/image";
 import Link from "next/link";
 import { FaAngleDown, FaAngleRight, FaBars } from "react-icons/fa6";

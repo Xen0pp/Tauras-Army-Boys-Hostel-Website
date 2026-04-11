@@ -23,7 +23,7 @@ import {
   UserCog
 } from "lucide-react";
 
-import TaurasLogo from "/public/assets/TaurasLogo.jpg";
+import TaurasLogo from "/public/assets/Picture.png";
 import Image from "next/image";
 import {
   Sidebar,
@@ -156,7 +156,7 @@ export function AppSidebar() {
       .filter((group) => group.items.length > 0);
 
     // Add Admin Panel for admin users
-    if (userInfo?.role?.id == 3 || userInfo?.role?.id === "3" || (user && user.email === 'mohitkumarbiswas9@gmail.com')) {
+    if (userInfo?.role?.id == 3 || userInfo?.role?.id === "3" || (user && ['mohitkumarbiswas9@gmail.com', 'taurusarmyboyshostel@gmail.com'].includes(user.email))) {
       groups.push({
         title: "Administration",
         items: [

@@ -42,7 +42,7 @@ const PostBox = () => {
 
   console.log("PostBox userInfo:", userInfo);
   // Only render if user has Admin role (id 3) or specific email
-  if (userInfo?.role?.id != 3 && userInfo?.role?.id !== "3" && userInfo?.email !== 'mohitkumarbiswas9@gmail.com') {
+  if (userInfo?.role?.id != 3 && userInfo?.role?.id !== "3" && !['mohitkumarbiswas9@gmail.com', 'taurusarmyboyshostel@gmail.com'].includes(userInfo?.email)) {
     return null;
   }
 

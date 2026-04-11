@@ -4,7 +4,7 @@ import { isAdmin, isAdminByEmail } from '@/lib/auth';
 
 // Hardcoded admin email as the ultimate fallback
 // (same email the sidebar already uses for admin visibility)
-const ADMIN_EMAILS = ['mohitkumarbiswas9@gmail.com'];
+const ADMIN_EMAILS = ['mohitkumarbiswas9@gmail.com', 'taurusarmyboyshostel@gmail.com'];
 
 async function verifyAuth(request) {
   try {

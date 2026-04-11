@@ -164,7 +164,7 @@ const Signup = () => {
                 className="inline-block mb-4 cursor-pointer"
               >
                 <Image
-                  src="/assets/TaurasLogo.jpg"
+                  src="/assets/Picture.png"
                   alt="Tauras Army Boys Hostel Logo"
                   width={400}
                   height={400}

@@ -8,7 +8,7 @@ const HomeLeft = () => {
       {/* Image */}
       <div className="mb-4">
         <Image
-          src="/assets/TaurasLogo.jpg"
+          src="/assets/Picture.png"
           alt="Tauras Army Boys Hostel"
           width={400}
           height={300}
@@ -19,14 +19,14 @@ const HomeLeft = () => {
       {/* Title and Deadline */}
       <div className="mb-2">
         <p className="text-gray-700 dark:text-gray-200 text-sm">
-         
+
         </p>
       </div>
 
       {/* Read More Button */}
       <div className="mb-4">
         <button className="text-vips-maroon dark:text-vips-maroon font-semibold">
-         
+
         </button>
       </div>
 

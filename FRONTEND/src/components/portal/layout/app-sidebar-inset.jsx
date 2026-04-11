@@ -21,7 +21,7 @@ import {
   TooltipTrigger,
 } from "../../../components/ui/tooltip";
 import { SidebarInset } from "../../../components/ui/sidebar";
-import TaurasLogo from "/public/assets/TaurasLogo.jpg";
+import TaurasLogo from "/public/assets/Picture.png";
 import Image from "next/image";
 import Link from "next/link";
 

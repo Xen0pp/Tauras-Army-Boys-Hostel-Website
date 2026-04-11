@@ -60,7 +60,7 @@ export async function POST(request) {
     }
 
     // Admin check
-    if (user.email !== 'mohitkumarbiswas9@gmail.com') {
+    if (!['mohitkumarbiswas9@gmail.com', 'taurusarmyboyshostel@gmail.com'].includes(user.email)) {
       return NextResponse.json({ error: 'Forbidden: Only admin can create events' }, { status: 403 });
     }
 

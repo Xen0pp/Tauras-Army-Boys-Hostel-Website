@@ -44,85 +44,86 @@ const GalleryContainer = () => {
       setLoading(true);
       setError(null);
 
+      // You can edit the "title" and "desc" values below to rename your photos and change their descriptions!
+      const galleryData = [
+        { file: 'TABH.png', title: 'Tauras Army Boys Hostel', desc: 'Tauras Army Boys Hostel - Memories and Moments' },
+        { file: 'Tara_Side.png', title: 'Tauras Army Boys Hostel', desc: 'Tauras Army Boys Hostel - Memories and Moments' },
+        { file: 'Tara_Front.png', title: 'Tara Block', desc: 'Tauras Army Boys Hostel - Memories and Moments' },
+        { file: 'Tara_mid.JPG', title: 'Tara Block', desc: 'Tauras Army Boys Hostel - Memories and Moments' },
+        { file: 'Thorat_Aerial.png', title: 'Thorat Block', desc: 'Tauras Army Boys Hostel - Memories and Moments' },
+        { file: 'thorat1.png', title: 'Thorat Block', desc: 'Tauras Army Boys Hostel - Memories and Moments' },
+        { file: 'thorat_mid.jpg', title: 'Thorat Block', desc: 'Tauras Army Boys Hostel - Memories and Moments' },
+        { file: 'room1.jpg', title: 'Room', desc: 'Tauras Army Boys Hostel - Memories and Moments' },
+        { file: 'room2.jpg', title: 'Room', desc: 'Tauras Army Boys Hostel - Memories and Moments' },
+        { file: 'Dorm.JPG', title: 'Dorm Rooms', desc: 'Tauras Army Boys Hostel - Memories and Moments' },
+        { file: 'Laundry.png', title: 'Laundry', desc: 'Tauras Army Boys Hostel - Memories and Moments' },
+        { file: 'mess1.png', title: 'Mess', desc: 'Tauras Army Boys Hostel - Memories and Moments' },
+        { file: 'og.jpeg', title: 'Hostel Open Gym', desc: 'Tauras Army Boys Hostel - Memories and Moments' },
+        { file: 'og2.jpeg', title: 'Hostel Open Gym', desc: 'Tauras Army Boys Hostel - Memories and Moments' },
+        { file: 'gym1.png', title: 'Hostel Gym', desc: 'Tauras Army Boys Hostel - Memories and Moments' },
+        { file: 'gym2.png', title: 'Hostel Gym', desc: 'Tauras Army Boys Hostel - Memories and Moments' },
+        { file: 'gym3.jpeg', title: 'Hostel Gym', desc: 'Tauras Army Boys Hostel - Memories and Moments' },
+        { file: 'Birthday.jpg', title: 'Birthday Celebration', desc: 'Tauras Army Boys Hostel - Memories and Moments' },
+        { file: 'birth2.jpeg', title: 'Birthday Celebration', desc: 'Tauras Army Boys Hostel - Memories and Moments' },
+        { file: 'birthday1.jpeg', title: 'Birthday Celebration', desc: 'Tauras Army Boys Hostel - Memories and Moments' },
+        { file: 'independence.jpg', title: 'Independence Day', desc: 'Tauras Army Boys Hostel - Memories and Moments' },
+        { file: 'indep_1.jpg', title: 'Independence Day', desc: 'Tauras Army Boys Hostel - Memories and Moments' },
+        { file: 'Independence_2.jpg', title: 'Independence Day', desc: 'Tauras Army Boys Hostel - Memories and Moments' },
+        { file: 'event3.jpeg', title: 'Dental Checkup', desc: 'Tauras Army Boys Hostel - Memories and Moments' },
+        { file: 'event2.jpeg', title: 'Dental Checkup', desc: 'Tauras Army Boys Hostel - Memories and Moments' },
+        { file: 'event1.jpeg', title: 'Dental Checkup', desc: 'Tauras Army Boys Hostel - Memories and Moments' },
+        { file: 'holi2.jpeg', title: 'Holi Celebration', desc: 'Tauras Army Boys Hostel - Memories and Moments' },
+        { file: 'holi1.jpeg', title: 'Holi Celebration', desc: 'Tauras Army Boys Hostel - Memories and Moments' },
+        { file: 'holi3.jpeg', title: 'Holi Celebration', desc: 'Tauras Army Boys Hostel - Memories and Moments' },
+        { file: 'nw.jpeg', title: 'New year Celebration', desc: 'Tauras Army Boys Hostel - Memories and Moments' },
+        { file: 'nw1.jpeg', title: 'New year Celebration', desc: 'Tauras Army Boys Hostel - Memories and Moments' }
+      ];
+
+      const staticImages = galleryData.map((item, index) => ({
+        id: `static-${index + 1}`,
+        title: item.title,
+        description: item.desc,
+        image_url: `/assets/${item.file}`,
+        event_date: new Date().toISOString(),
+        event_location: 'Tauras Army Boys Hostel',
+        tags: ['TABH', 'Hostel', 'Gallery'],
+        view_count: 0,
+        likes: 0,
+        comments: 0,
+        priority: 'normal'
+      }));
+
+      // Set the explicitly requested images
+      setImages(staticImages);
+
       // Build query parameters
       const params = new URLSearchParams();
       if (selectedCategory !== 'all') params.append('category', selectedCategory);
       if (selectedTag !== 'all') params.append('tag', selectedTag);
       if (searchTerm) params.append('search', searchTerm);
 
-      // Fetch images, categories, and tags in parallel
+      // Fetch categories and tags in parallel
       const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8001/api/v1';
-      const [imagesRes, categoriesRes, tagsRes] = await Promise.all([
-        fetch(`${baseUrl}/gallery/images/?${params}`),
+      const [categoriesRes, tagsRes] = await Promise.all([
         fetch(`${baseUrl}/gallery/categories/`),
         fetch(`${baseUrl}/gallery/tags/`)
       ]);
 
-      if (!imagesRes.ok || !categoriesRes.ok || !tagsRes.ok) {
-        throw new Error('Failed to fetch gallery data');
+      if (categoriesRes.ok && tagsRes.ok) {
+        const [categoriesData, tagsData] = await Promise.all([
+          categoriesRes.json(),
+          tagsRes.json()
+        ]);
+        setCategories(categoriesData.results || []);
+        setFeaturedTags(tagsData.results || []);
       }
-
-      const [imagesData, categoriesData, tagsData] = await Promise.all([
-        imagesRes.json(),
-        categoriesRes.json(),
-        tagsRes.json()
-      ]);
-
-      setImages(imagesData.results || []);
-      setCategories(categoriesData.results || []);
-      setFeaturedTags(tagsData.results || []);
 
     } catch (err) {
       console.error('Error fetching gallery data:', err);
       console.error('Error details:', err.message);
 
-      // Fallback to static images from public/assets
-      const staticImages = [
-        {
-          id: 'static-1',
-          title: 'TABH',
-          description: 'Tauras Army Boys Hostel - Memories and Moments',
-          image_url: '/assets/Tabh1.png',
-          event_date: new Date().toISOString(),
-          event_location: 'Tauras Army Boys Hostel',
-          tags: ['TABH', 'Hostel', 'Gallery'],
-          view_count: 0,
-          likes: 0,
-          comments: 0,
-          priority: 'normal'
-        },
-        {
-          id: 'static-2',
-          title: 'TABH Gallery Image 2',
-          description: 'Tauras Army Boys Hostel - Brotherhood and Unity',
-          image_url: '/assets/Tabh2.png',
-          event_date: new Date().toISOString(),
-          event_location: 'Tauras Army Boys Hostel',
-          tags: ['TABH', 'Hostel', 'Gallery'],
-          view_count: 0,
-          likes: 0,
-          comments: 0,
-          priority: 'normal'
-        },
-        {
-          id: 'static-3',
-          title: 'TABH Gallery Image 3',
-          description: 'Tauras Army Boys Hostel - Life and Learning',
-          image_url: '/assets/Tabh3.png',
-          event_date: new Date().toISOString(),
-          event_location: 'Tauras Army Boys Hostel',
-          tags: ['TABH', 'Hostel', 'Gallery'],
-          view_count: 0,
-          likes: 0,
-          comments: 0,
-          priority: 'normal'
-        }
-      ];
-
-      setImages(staticImages);
       setCategories([]);
       setFeaturedTags([]);
-      // Clear error since we have fallback images to display
       setError(null);
     } finally {
       setLoading(false);
@@ -495,7 +496,7 @@ const GalleryContainer = () => {
                 initial={{ scale: 0.9, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 exit={{ scale: 0.9, opacity: 0 }}
-                className="bg-white dark:bg-gray-800 rounded-lg max-w-4xl max-h-[90vh] overflow-hidden"
+                className="bg-white dark:bg-gray-800 rounded-lg w-11/12 max-w-7xl max-h-[95vh] flex flex-col overflow-hidden"
                 onClick={(e) => e.stopPropagation()}
               >
                 {/* Header */}
@@ -512,22 +513,22 @@ const GalleryContainer = () => {
                 </div>
 
                 {/* Image */}
-                <div className="relative">
+                <div className="relative bg-black flex-shrink-0">
                   {selectedImage.image_url ? (
                     <img
                       src={selectedImage.image_url}
                       alt={selectedImage.title}
-                      className="w-full h-96 object-contain bg-gray-100 dark:bg-gray-900"
+                      className="w-full h-[50vh] md:h-[70vh] object-contain bg-black"
                     />
                   ) : (
-                    <div className="w-full h-96 bg-gray-200 dark:bg-gray-700 flex items-center justify-center">
+                    <div className="w-full h-[50vh] md:h-[70vh] bg-gray-200 dark:bg-gray-700 flex items-center justify-center">
                       <Camera className="h-24 w-24 text-gray-400" />
                     </div>
                   )}
                 </div>
 
                 {/* Details */}
-                <div className="p-6">
+                <div className="p-6 overflow-y-auto">
                   <p className="text-gray-600 dark:text-gray-300 mb-4">
                     {selectedImage.description}
                   </p>
